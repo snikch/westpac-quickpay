@@ -72,7 +72,7 @@
             return;
         }
         // Are we logged in?
-        if([self pageHasContent:@"Welcome / account balances"]){
+        if([self pageHasContent:@"your last login"]){
             NSLog(@"Logged in");
             self.progressProxy.progressBlock = nil;
             finished = YES;
