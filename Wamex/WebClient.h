@@ -19,4 +19,7 @@
                   success: (void (^)()) successBlock
                   failure: (void (^)(NSError * error)) failureBlock
                  progress: (void (^)(float progress)) progressBlock;
+
+-(void) loadPayees: (void (^)(NSArray *payees)) successBlock
+                  failure: (void (^)(NSError * error)) failureBlock;
 @end

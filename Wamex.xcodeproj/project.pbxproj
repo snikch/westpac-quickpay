@@ -27,6 +27,7 @@
 		2030143519020CC4000F0521 /* SettingsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143419020CC4000F0521 /* SettingsNavigationViewController.m */; };
 		2030143B190215D0000F0521 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143A190215D0000F0521 /* WebClient.m */; };
 		2030143E190217E3000F0521 /* UIWebView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143D190217E3000F0521 /* UIWebView+Blocks.m */; };
+		2030144119028AC2000F0521 /* PaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030144019028AC2000F0521 /* PaymentController.m */; };
 		7BE89481F53C4B39932776FF /* libPods-Wamex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		2030143A190215D0000F0521 /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
 		2030143C190217E3000F0521 /* UIWebView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Blocks.h"; sourceTree = "<group>"; };
 		2030143D190217E3000F0521 /* UIWebView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Blocks.m"; sourceTree = "<group>"; };
+		2030143F19028AC2000F0521 /* PaymentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentController.h; sourceTree = "<group>"; };
+		2030144019028AC2000F0521 /* PaymentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentController.m; sourceTree = "<group>"; };
 		52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wamex.xcconfig"; path = "Pods/Pods-Wamex.xcconfig"; sourceTree = "<group>"; };
 		D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wamex.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -145,6 +148,8 @@
 				2030140A1901F655000F0521 /* Main_iPad.storyboard */,
 				2030140D1901F655000F0521 /* MainViewController.h */,
 				2030140E1901F655000F0521 /* MainViewController.m */,
+				2030143F19028AC2000F0521 /* PaymentController.h */,
+				2030144019028AC2000F0521 /* PaymentController.m */,
 				203014301901FDC8000F0521 /* Settings.h */,
 				203014311901FDC8000F0521 /* Settings.m */,
 				2030143319020CC4000F0521 /* SettingsNavigationViewController.h */,
@@ -327,6 +332,7 @@
 				2030143E190217E3000F0521 /* UIWebView+Blocks.m in Sources */,
 				2030143519020CC4000F0521 /* SettingsNavigationViewController.m in Sources */,
 				2030143B190215D0000F0521 /* WebClient.m in Sources */,
+				2030144119028AC2000F0521 /* PaymentController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

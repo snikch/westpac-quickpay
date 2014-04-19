@@ -27,7 +27,10 @@
 
 #define kTransferMoneyName @"Transfer money / Pay Anyone"
 #define kMakePaymentsName @"Make a subsequent payment"
+#define kPrintPayeeListName @"Print a list of people you have saved"
 
 #define kPayeesTableId @"TBL4"
 
-#define jsPayeeNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 2, 99).reduce(function(a, tr){ var m = tr.children[0].innerHTML.match(/([\w\s]+)\s\([0-9]+\)/); if(m) a.push(m[1]); return a; }, []).join(',');"
+#define jsPayeeNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 2, 99).reduce(function(a, tr){ var m = tr.children[0].innerHTML.match(/([\\w\\s]+)\\s\\([0-9]+\\)/); if(m) a.push(m[1]); return a; }, []).join(',');"
+
+#define jsAccountNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 5, 199).reduce(function(a, el, i){ if(i % 6 !== 0){ return a; }; a.push(el.children[0].children[0].innerHTML); return a; }, []).join(',');"

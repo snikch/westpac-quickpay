@@ -12,14 +12,13 @@
 
 @class FlipsideViewController;
 
-@protocol FlipsideViewControllerDelegate
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
-@end
 
 @interface FlipsideViewController : XLFormViewController
 
 @property BOOL hasEnteredCredentials;
 @property BOOL canCheckCredentials;
+@property (strong, nonatomic) NSArray *accounts;
+@property (strong, nonatomic) NSArray *payees;
 @property (strong, nonatomic) WebClient *client;
 
 - (IBAction)done:(id)sender;

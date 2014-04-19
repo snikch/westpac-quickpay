@@ -8,8 +8,6 @@
 
 #import "FlipsideViewController.h"
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate, UIPopoverControllerDelegate>
-
-@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+@interface MainViewController : UINavigationController
 
 @end

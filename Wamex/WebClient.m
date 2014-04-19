@@ -64,7 +64,6 @@
     };
     
     __block double loginTimeout = 10.0;
-    double loginDelay = 1.0;
     
     // Block to check for login success and throw through to failure block
     checkLoggedIn = ^(void) {
@@ -76,7 +75,9 @@
             NSLog(@"Logged in");
             self.progressProxy.progressBlock = nil;
             finished = YES;
-            successBlock();
+            NSString *csv = [self.view stringByEvaluatingJavaScriptFromString:jsAccountNames];
+            NSArray *accounts = [csv componentsSeparatedByString:@","];
+            successBlock(accounts);
             return;
         }
         // Is there an error message?
@@ -109,6 +110,39 @@
     [self.view loadRequest:[NSURLRequest requestWithURL: [NSURL URLWithString:kUrlLogin]] loaded:loaded failed:failed];
 }
 
+/**
+ * Attempt to get the list of payees. Assumes we're logged in.
+ */
+-(void) loadPayees:(void (^)(NSArray *payees)) successBlock
+                  failure: (void (^)(NSError * error)) failureBlock
+{
+    NSLog(@"Loading Payees");
+    __block void(^paymentsLoaded)(UIWebView *webView);
+    __block void(^payeesLoaded)(UIWebView *webView);
+    
+    // Load the payments page
+    paymentsLoaded = ^(UIWebView *webView) {
+        [self clickElementWithName:kPrintPayeeListName complete:payeesLoaded];
+    };
+    // Loads the payee print page
+    payeesLoaded = ^(UIWebView *webView) {
+        NSString *csv = [self.view stringByEvaluatingJavaScriptFromString:jsPayeeNames];
+        NSArray *payees = [csv componentsSeparatedByString:@","];
+        successBlock(payees);
+    };
+    
+    [self clickElementWithName:kTransferMoneyName complete:paymentsLoaded];
+
+    
+    // Block to throw failures through to the calling failure block
+    void (^failed)(UIWebView *webView, NSError *error) = ^(UIWebView *webView, NSError *error) {
+        NSLog(@"Ignoring failure %@", error);
+        //failureBlock(error);
+    };
+    [self.view setFailureBlock:failed];
+}
+
+
 -(BOOL)pageHasContent:(NSString*)string{
     NSLog(@"Checking if page has content: %@", string);
     NSString * matchString = [NSString stringWithFormat:@"!!document.body.innerHTML.match(/%@/)", string];
@@ -116,8 +150,10 @@
     return [match isEqualToString:@"true"];
 }
 
--(void)clickElementWithName: (NSString*) name complete:(void (^)(void)) completeBlock {
-    NSString *jsString = [NSString stringWithFormat:@"document.body.getElementsByName('%@')[0].click", name];
-    [self.view stringByEvaluatingJavaScriptFromString: jsString];
+-(void)clickElementWithName: (NSString*) name complete:(void (^)(UIWebView *webView)) completeBlock {
+    NSString *jsString = [NSString stringWithFormat:@"document.getElementsByName('%@')[0].click()", name];
+    NSString *result = [self.view stringByEvaluatingJavaScriptFromString: jsString];
+    NSLog(@"Result of click: %@", result);
+    [self.view setLoadedBlock:completeBlock];
 }
 @end

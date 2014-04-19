@@ -18,7 +18,6 @@ PODS:
   - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - GSKeychain (1.0.0)
   - MRProgress (0.4.1):
     - MRProgress/ActivityIndicator
     - MRProgress/Blur
@@ -56,6 +55,7 @@ PODS:
     - NJKWebViewProgress/ProgressView
   - NJKWebViewProgress/Core (0.2.2)
   - NJKWebViewProgress/ProgressView (0.2.2)
+  - PDKeychainBindingsController (0.0.1)
   - XLDataLoader (1.0.0):
     - AFNetworking (~> 2.0)
   - XLForm (1.0.0):
@@ -64,15 +64,15 @@ PODS:
     - XLDataLoader (~> 1.0)
 
 DEPENDENCIES:
-  - GSKeychain (~> 1.0.0)
   - NJKWebViewProgress (~> 0.2.2)
+  - PDKeychainBindingsController (~> 0.0.1)
   - XLForm (~> 1.0.0)
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
-  GSKeychain: 59439fa4bb05d21f2cbd4b67e7133c2572cc8dc4
   MRProgress: 6530ce71278dd7ecfb5e3c3e37df03a323690936
   NJKWebViewProgress: 4f905b9ab7eb91525dc899cacebd2941a6d4553b
+  PDKeychainBindingsController: 463c207f8726e4aaec1ec20fd1876082ee86cb0a
   XLDataLoader: 05925b09fb2110b50a98d5fd9500823f5035b4ea
   XLForm: d26988aa9b7309095f4bbea66bafe5535ff2ccb9
 

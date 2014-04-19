@@ -7,16 +7,17 @@
 //
 
 #import "Settings.h"
-#import "GSKeychain.h"
+#import <PDKeychainBindings.h>
 
 @implementation Settings
 
 +(BOOL) isSetup{
-    NSString *username = [[GSKeychain systemKeychain] secretForKey:kUsernameKey];
+    PDKeychainBindings *keychain = [PDKeychainBindings sharedKeychainBindings];
+    NSString *username = [keychain stringForKey:@"username"];
     if(username == NULL){
         return false;
     }
-    NSString *password = [[GSKeychain systemKeychain] secretForKey:kPasswordKey];
+    NSString *password = [keychain stringForKey:@"password"];
     if(password == NULL){
         return false;
     }
