@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <XLForm.h>
+#import "WebClient.h"
 
 @class FlipsideViewController;
 
@@ -14,9 +16,11 @@
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
 @end
 
-@interface FlipsideViewController : UIViewController
+@interface FlipsideViewController : XLFormViewController
 
-@property (weak, nonatomic) id <FlipsideViewControllerDelegate> delegate;
+@property BOOL hasEnteredCredentials;
+@property BOOL canCheckCredentials;
+@property (strong, nonatomic) WebClient *client;
 
 - (IBAction)done:(id)sender;
 

@@ -14,3 +14,20 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+
+
+
+#define kUsernameKey @"westpacUsername"
+#define kPasswordKey @"westpacPassword"
+
+#define kUrlLogin @"https://sec.westpac.co.nz/IOLB/Login.jsp"
+#define kLoginFormUsernameName @"j_username"
+#define kLoginFormPasswordName @"j_password"
+
+#define kTransferMoneyName @"Transfer money / Pay Anyone"
+#define kMakePaymentsName @"Make a subsequent payment"
+
+#define kPayeesTableId @"TBL4"
+
+#define jsPayeeNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 2, 99).reduce(function(a, tr){ var m = tr.children[0].innerHTML.match(/([\w\s]+)\s\([0-9]+\)/); if(m) a.push(m[1]); return a; }, []).join(',');"

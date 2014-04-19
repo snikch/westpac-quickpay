@@ -23,6 +23,11 @@
 		2030141D1901F655000F0521 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203013F91901F655000F0521 /* UIKit.framework */; };
 		203014251901F655000F0521 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 203014231901F655000F0521 /* InfoPlist.strings */; };
 		203014271901F656000F0521 /* WamexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 203014261901F656000F0521 /* WamexTests.m */; };
+		203014321901FDC8000F0521 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 203014311901FDC8000F0521 /* Settings.m */; };
+		2030143519020CC4000F0521 /* SettingsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143419020CC4000F0521 /* SettingsNavigationViewController.m */; };
+		2030143B190215D0000F0521 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143A190215D0000F0521 /* WebClient.m */; };
+		2030143E190217E3000F0521 /* UIWebView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143D190217E3000F0521 /* UIWebView+Blocks.m */; };
+		7BE89481F53C4B39932776FF /* libPods-Wamex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,16 @@
 		203014221901F655000F0521 /* WamexTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WamexTests-Info.plist"; sourceTree = "<group>"; };
 		203014241901F655000F0521 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		203014261901F656000F0521 /* WamexTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WamexTests.m; sourceTree = "<group>"; };
+		203014301901FDC8000F0521 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		203014311901FDC8000F0521 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		2030143319020CC4000F0521 /* SettingsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNavigationViewController.h; sourceTree = "<group>"; };
+		2030143419020CC4000F0521 /* SettingsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationViewController.m; sourceTree = "<group>"; };
+		20301439190215D0000F0521 /* WebClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
+		2030143A190215D0000F0521 /* WebClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
+		2030143C190217E3000F0521 /* UIWebView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Blocks.h"; sourceTree = "<group>"; };
+		2030143D190217E3000F0521 /* UIWebView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Blocks.m"; sourceTree = "<group>"; };
+		52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wamex.xcconfig"; path = "Pods/Pods-Wamex.xcconfig"; sourceTree = "<group>"; };
+		D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wamex.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +83,7 @@
 				203013F81901F655000F0521 /* CoreGraphics.framework in Frameworks */,
 				203013FA1901F655000F0521 /* UIKit.framework in Frameworks */,
 				203013F61901F655000F0521 /* Foundation.framework in Frameworks */,
+				7BE89481F53C4B39932776FF /* libPods-Wamex.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +107,7 @@
 				203014201901F655000F0521 /* WamexTests */,
 				203013F41901F655000F0521 /* Frameworks */,
 				203013F31901F655000F0521 /* Products */,
+				52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +127,7 @@
 				203013F71901F655000F0521 /* CoreGraphics.framework */,
 				203013F91901F655000F0521 /* UIKit.framework */,
 				2030141A1901F655000F0521 /* XCTest.framework */,
+				D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,12 +135,20 @@
 		203013FB1901F655000F0521 /* Wamex */ = {
 			isa = PBXGroup;
 			children = (
+				2030143C190217E3000F0521 /* UIWebView+Blocks.h */,
+				2030143D190217E3000F0521 /* UIWebView+Blocks.m */,
+				20301439190215D0000F0521 /* WebClient.h */,
+				2030143A190215D0000F0521 /* WebClient.m */,
 				203014041901F655000F0521 /* AppDelegate.h */,
 				203014051901F655000F0521 /* AppDelegate.m */,
 				203014071901F655000F0521 /* Main_iPhone.storyboard */,
 				2030140A1901F655000F0521 /* Main_iPad.storyboard */,
 				2030140D1901F655000F0521 /* MainViewController.h */,
 				2030140E1901F655000F0521 /* MainViewController.m */,
+				203014301901FDC8000F0521 /* Settings.h */,
+				203014311901FDC8000F0521 /* Settings.m */,
+				2030143319020CC4000F0521 /* SettingsNavigationViewController.h */,
+				2030143419020CC4000F0521 /* SettingsNavigationViewController.m */,
 				203014101901F655000F0521 /* FlipsideViewController.h */,
 				203014111901F655000F0521 /* FlipsideViewController.m */,
 				203014131901F655000F0521 /* Images.xcassets */,
@@ -167,9 +193,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2030142A1901F656000F0521 /* Build configuration list for PBXNativeTarget "Wamex" */;
 			buildPhases = (
+				32B4E749575B4B519124250B /* Check Pods Manifest.lock */,
 				203013EE1901F655000F0521 /* Sources */,
 				203013EF1901F655000F0521 /* Frameworks */,
 				203013F01901F655000F0521 /* Resources */,
+				1622FD679C374CDBA24B5B20 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,6 +281,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1622FD679C374CDBA24B5B20 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Wamex-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		32B4E749575B4B519124250B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		203013EE1901F655000F0521 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -260,8 +321,12 @@
 			files = (
 				203014061901F655000F0521 /* AppDelegate.m in Sources */,
 				2030140F1901F655000F0521 /* MainViewController.m in Sources */,
+				203014321901FDC8000F0521 /* Settings.m in Sources */,
 				203014121901F655000F0521 /* FlipsideViewController.m in Sources */,
 				203014021901F655000F0521 /* main.m in Sources */,
+				2030143E190217E3000F0521 /* UIWebView+Blocks.m in Sources */,
+				2030143519020CC4000F0521 /* SettingsNavigationViewController.m in Sources */,
+				2030143B190215D0000F0521 /* WebClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +460,7 @@
 		};
 		2030142B1901F656000F0521 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -408,6 +474,7 @@
 		};
 		2030142C1901F656000F0521 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -480,6 +547,7 @@
 				2030142C1901F656000F0521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2030142D1901F656000F0521 /* Build configuration list for PBXNativeTarget "WamexTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +556,7 @@
 				2030142F1901F656000F0521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,8 @@
 //
 
 #import "MainViewController.h"
+#import "Settings.h"
+#import "SettingsNavigationViewController.h"
 
 @interface MainViewController ()
 
@@ -18,6 +20,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+}
+-(void)viewDidAppear:(BOOL)animated{
+    if(![Settings isSetup]){
+        [self showSettings];
+    }
+}
+-(void) showSettings{
+    SettingsNavigationViewController * viewController = [[SettingsNavigationViewController alloc] init];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +57,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
         
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             UIPopoverController *popoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
