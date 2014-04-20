@@ -9,5 +9,6 @@
 #import "XLFormViewController.h"
 
 @interface PaymentController : XLFormViewController <UIPopoverControllerDelegate>
+@property BOOL dirty;
 - (IBAction)togglePopover:(id)sender;
 @end

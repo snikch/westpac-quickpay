@@ -9,6 +9,7 @@
 #import "FlipsideViewController.h"
 #import "Settings.h"
 #import <PDKeychainBindings.h>
+#import "SettingsNavigationViewController.h"
 
 @interface FlipsideViewController ()
 
@@ -19,7 +20,7 @@
 -(id)init{
     self.hasEnteredCredentials = NO;
     self.client = [[WebClient alloc]init];
-
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.accounts = [defaults objectForKey:@"accounts"];
     self.payees = [defaults objectForKey:@"payees"];
@@ -28,7 +29,7 @@
     NSString *username = [keychain stringForKey:@"username"];
     NSString *password = [keychain stringForKey:@"password"];
     BOOL hasInitialCredentials = password && username;
-
+    
     // Do any additional setup after loading the view, typically from a nib.
     XLFormDescriptor * form;
     XLFormSectionDescriptor * section;
@@ -56,9 +57,9 @@
     // Title
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"login" rowType:XLFormRowDescriptorTypeButton title:hasInitialCredentials ? @"Reload Data" : @"Check Credentials"];
     [row.cellConfig setObject:[UIColor grayColor] forKey:@"textLabel.textColor"];
-
+    
     [section addFormRow:row];
-
+    
     
     self = [self initWithForm:form formMode:XLFormModeCreate showCancelButton:hasInitialCredentials showSaveButton:hasInitialCredentials showDeleteButton:NO deleteButtonCaption:nil];
     
@@ -70,6 +71,19 @@
     }else{
         self.form.assignFirstResponderOnShow = YES;
     }
+    
+    // Add the 'delete' button
+    if (hasInitialCredentials){
+        section = [XLFormSectionDescriptor formSection];
+        [form addFormSection:section];
+        
+        // Title
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:@"delete" rowType:XLFormRowDescriptorTypeButton title:@"Delete Data"];
+        [row.cellConfig setObject:[UIColor redColor] forKey:@"textLabel.textColor"];
+        
+        [section addFormRow:row];
+    }
+    
     
     return self;
 }
@@ -88,8 +102,25 @@
     [super didSelectFormRow:formRow];
     if([formRow.tag isEqualToString:@"login"]){
         [self checkCredentials];
+    } else if([formRow.tag isEqualToString:@"delete"]){
+        [self deleteData];
+        [self cancelPressed:nil];
     }
     
+}
+-(void)deleteData{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"payees"];
+    [defaults removeObjectForKey:@"payee"];
+    [defaults removeObjectForKey:@"accounts"];
+    [defaults removeObjectForKey:@"account"];
+    [defaults synchronize];
+
+    
+    PDKeychainBindings *keychain = [PDKeychainBindings sharedKeychainBindings];
+
+    [keychain removeObjectForKey:@"username"];
+    [keychain removeObjectForKey:@"password"];
 }
 #pragma mark - Actions
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,11 +152,11 @@
     if(can == YES){
         [row.cellConfig setObject:[UIColor greenColor] forKey:@"textLabel.textColor"];
         self.navigationItem.rightBarButtonItem = self.saveButton;
-
+        
     }else{
         [row.cellConfig setObject:[UIColor grayColor] forKey:@"textLabel.textColor"];
         self.navigationItem.rightBarButtonItem = nil;
-
+        
     }
     [self.form removeFormRow:row];
     [section addFormRow:row];
@@ -153,11 +184,6 @@
         [self hideClient];
     } progress:nil ];
     
-    CGRect pos = self.view.bounds;
-    pos.origin.y -= pos.size.height / 3;
-    pos.origin.y += pos.size.height;
-    self.client.view.frame = pos;
-    [self.view addSubview:self.client.view];
 }
 
 -(void)loadPayees{
@@ -182,6 +208,12 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *payee = [defaults stringForKey:@"payee"];
     NSString *account = [defaults stringForKey:@"account"];
+    if (payee == NULL) {
+        payee = [self.payees objectAtIndex:0];
+    }
+    if (account == NULL) {
+        account = [self.accounts objectAtIndex:0];
+    }
     // Basic Information
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Defaults"];
     [self.form addFormSection:section];
@@ -211,11 +243,14 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.payees forKey:@"payees"];
     [defaults setObject:self.accounts forKey:@"accounts"];
-    [defaults setValue:password forKey:@"password"];
-    [defaults setValue:username forKey:@"username"];
     [defaults setValue:payee.formValue forKey:@"payee"];
     [defaults setValue:account.formValue forKey:@"account"];
     [defaults synchronize];
+    SettingsNavigationViewController *nc = (SettingsNavigationViewController*)self.navigationController;
+    if (nc.settingsDidChange){
+        nc.settingsDidChange();
+    }
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

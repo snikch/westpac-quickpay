@@ -34,6 +34,9 @@
     [section addFormRow:row];
     
     
+    self = [self initWithForm:form formMode:XLFormModeCreate showCancelButton:NO showSaveButton:NO showDeleteButton:NO deleteButtonCaption:nil];
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *payee = [defaults stringForKey:@"payee"];
     NSString *account = [defaults stringForKey:@"account"];
@@ -61,11 +64,37 @@
     [section addFormRow:row];
     
     
-    self = [self initWithForm:form formMode:XLFormModeCreate showCancelButton:NO showSaveButton:NO showDeleteButton:NO deleteButtonCaption:nil];
-    
     self.showNetworkReachability = YES;
     self.form.assignFirstResponderOnShow = YES;
     return self;
+
+}
+-(void)viewWillAppear:(BOOL)animated{
+    if(self.dirty == YES){
+        [self refreshSelects];
+        self.dirty = NO;
+    }
+}
+
+-(void)refreshSelects{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *payee = [defaults stringForKey:@"payee"];
+    NSString *account = [defaults stringForKey:@"account"];
+    NSLog(@"p and a: %@ %@", payee, account);
+    NSArray *payees = [defaults objectForKey:@"payees"];
+    NSArray *accounts = [defaults objectForKey:@"accounts"];
+    XLFormRowDescriptor * payeeRow = [self.form formRowWithTag:@"payee"];
+
+    XLFormRowDescriptor * accountsRow = [self.form formRowWithTag:@"account"];
+    [Settings loadArray: accounts intoRow: accountsRow withDefault: account];
+        [Settings loadArray: payees intoRow: payeeRow withDefault: payee];
+    
+    XLFormSectionDescriptor *section = [self.form formSectionAtIndex:0];
+    [self.form removeFormRow:accountsRow];
+    [self.form removeFormRow:payeeRow];
+    [section addFormRow:accountsRow];
+    [section addFormRow:payeeRow];
+
 
 }
 
@@ -106,6 +135,10 @@
 
 -(void) showSettings{
     SettingsNavigationViewController * viewController = [[SettingsNavigationViewController alloc] init];
+    viewController.settingsDidChange = ^{
+        NSLog(@"Setting Dirty");
+        self.dirty = YES;
+    };
     [self presentViewController:viewController animated:YES completion:nil];
 }
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingsNavigationViewController : UINavigationController
-
+@property (strong, nonatomic) void(^settingsDidChange)(void);
 @end

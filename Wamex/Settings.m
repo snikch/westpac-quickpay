@@ -46,7 +46,7 @@
     
     row.selectorOptions = arrayOptions;
     
-    if (!row.value) {
+    if (!row.value && [arrayOptions count] > 0) {
         row.value = [arrayOptions objectAtIndex:0];
     }
 }

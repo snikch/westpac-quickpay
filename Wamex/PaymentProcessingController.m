@@ -34,7 +34,7 @@
     progressView.titleLabelText = @"Starting Payment";
     [self.navigationController.view addSubview:progressView];
     [progressView show:YES];
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 10.0 * NSEC_PER_SEC);
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 30.0 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^{
         [progressView hide:YES];
         //[progressView removeFromSuperview];

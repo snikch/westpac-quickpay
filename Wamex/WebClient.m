@@ -41,7 +41,6 @@
     NSString* jsString = @"document.getElementsByName('%@')[0].value=\"%@\";document.getElementsByName('%@')[0].value=\"%@\";document.getElementsByClassName('button')[0].children[0].click()";
     
     jsString = [NSString stringWithFormat:jsString, kLoginFormUsernameName, username, kLoginFormPasswordName, password];
-    NSLog(@"%@", jsString);
    
     
     __block BOOL started = NO;
@@ -52,6 +51,9 @@
     __block void(^checkLoggedIn)(void);
     
     self.progressProxy.progressBlock = ^(float progress){
+        if(!progressBlock){
+            return;
+        }
         progress = (progress / 3.0);
         if (guardian == YES){
             progress += 0.66;
