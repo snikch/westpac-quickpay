@@ -9,6 +9,7 @@
 #import "PaymentController.h"
 #import "Settings.h"
 #import "SettingsNavigationViewController.h"
+#import "PaymentProcessingController.h"
 
 @implementation PaymentController
 
@@ -21,7 +22,7 @@
     XLFormSectionDescriptor * section;
     XLFormRowDescriptor * row;
     
-    form = [XLFormDescriptor formDescriptorWithTitle:@"Settings"];
+    form = [XLFormDescriptor formDescriptorWithTitle:@"Make Payment"];
     
     section = [XLFormSectionDescriptor formSection];
     [form addFormSection:section];
@@ -29,19 +30,33 @@
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"amount" rowType:XLFormRowDescriptorTypeNumber title:@"Amount"];
     [section addFormRow:row];
     
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:@"reference" rowType:XLFormRowDescriptorTypeText title:@"Reference"];
+    [section addFormRow:row];
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *payee = [defaults stringForKey:@"payee"];
+    NSString *account = [defaults stringForKey:@"account"];
+    NSArray *payees = [defaults objectForKey:@"payees"];
+    NSArray *accounts = [defaults objectForKey:@"accounts"];
+    
+    // Payee
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"payee" rowType:XLFormRowDescriptorTypeSelectorPush title:@"Payee"];
+    [Settings loadArray: payees intoRow: row withDefault: payee];
     [section addFormRow:row];
     
+    // Account
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"account" rowType:XLFormRowDescriptorTypeSelectorPush title:@"Account"];
+    [Settings loadArray: accounts intoRow: row withDefault: account];
     [section addFormRow:row];
     
-    // Add the 'check' button
+    
     section = [XLFormSectionDescriptor formSection];
     [form addFormSection:section];
     
     // Title
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:@"login" rowType:XLFormRowDescriptorTypeButton title:@"Pay"];
-    [row.cellConfig setObject:[UIColor grayColor] forKey:@"textLabel.textColor"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:@"makePayment" rowType:XLFormRowDescriptorTypeButton title:@"Pay"];
+    [row.cellConfig setObject:[UIColor greenColor] forKey:@"textLabel.textColor"];
     
     [section addFormRow:row];
     
@@ -53,6 +68,36 @@
     return self;
 
 }
+
+#pragma mark - XLFormDescriptorDelegate
+
+-(void)didSelectFormRow:(XLFormRowDescriptor *)formRow{
+    [super didSelectFormRow:formRow];
+    if([formRow.tag isEqualToString:@"makePayment"]){
+        [self makePayment];
+    }
+    
+}
+
+-(void)makePayment{
+    
+    NSString *reference = [self.form formRowWithTag:@"reference"].value;
+    NSNumber *amount = [self.form formRowWithTag:@"amount"].value;
+    XLFormOptionsObject *accountOption = [self.form formRowWithTag:@"account"].value;
+    XLFormOptionsObject *payeeOption = [self.form formRowWithTag:@"payee"].value;
+    NSString *payee = payeeOption.formValue;
+    NSString *account = accountOption.formValue;
+    PaymentProcessingController *pc = [[PaymentProcessingController alloc] init];
+    
+    pc.amount = amount;
+    pc.account = account;
+    pc.payee = payee;
+    pc.reference = reference;
+    
+    [self.navigationController pushViewController:pc animated:YES];
+}
+
+
 -(void)viewDidAppear:(BOOL)animated{
     if(![Settings isSetup]){
         [self showSettings];
@@ -68,4 +113,12 @@
 {
     [self showSettings];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Change the selected background view of the cell.
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
 @end

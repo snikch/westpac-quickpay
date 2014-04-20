@@ -13,7 +13,12 @@
 
 +(BOOL) isSetup;
 
++(NSString*) username;
++(NSString*) password;
 
++(void) loadArray: (NSArray *)array
+          intoRow: (XLFormRowDescriptor*)row
+      withDefault: (NSString*) defaultValue;
 @end
 
 

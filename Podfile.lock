@@ -64,6 +64,7 @@ PODS:
     - XLDataLoader (~> 1.0)
 
 DEPENDENCIES:
+  - MRProgress (~> 0.4.1)
   - NJKWebViewProgress (~> 0.2.2)
   - PDKeychainBindingsController (~> 0.0.1)
   - XLForm (~> 1.0.0)

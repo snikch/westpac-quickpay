@@ -22,4 +22,12 @@
 
 -(void) loadPayees: (void (^)(NSArray *payees)) successBlock
                   failure: (void (^)(NSError * error)) failureBlock;
+
+-(void)makePaymentFrom: (NSString*)account
+                    to: (NSString*)payee
+                   for:(NSNumber*)amount
+         withReference: (NSString*)reference
+               success: (void (^)()) successBlock
+               failure: (void (^)(NSError * error)) failureBlock
+              progress: (void (^)(double progress, NSString* state)) progressBlock;
 @end

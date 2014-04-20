@@ -40,7 +40,7 @@
     [form addFormSection:section];
     
     // Title
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:@"username" rowType:XLFormRowDescriptorTypeText title:@"Customer ID"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:@"username" rowType:XLFormRowDescriptorTypeAccount title:@"Customer ID"];
     row.value = username;
     [section addFormRow:row];
     
@@ -188,40 +188,12 @@
     
     // Account
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"account" rowType:XLFormRowDescriptorTypeSelectorPush title:@"Account"];
-    __block NSMutableArray *accountOptions = @[].mutableCopy;
-    [self.accounts enumerateObjectsUsingBlock:^(NSString * object, NSUInteger idx, BOOL *stop) {
-        XLFormOptionsObject *option = [XLFormOptionsObject formOptionsObjectWithValue:object displayText:object];
-        [accountOptions addObject:option];
-        if ([object isEqualToString:account]){
-            row.value = option;
-        }
-    }];
-    
-    row.selectorOptions = accountOptions;
-    
-    if (!row.value) {
-        row.value = [accountOptions objectAtIndex:0];
-    }
+    [Settings loadArray: self.accounts intoRow: row withDefault: account];
     [section addFormRow:row];
     
     // Payee
-    __block NSMutableArray *payeeOptions = @[].mutableCopy;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:@"payee" rowType:XLFormRowDescriptorTypeSelectorPush title:@"Payee"];
-
-    // [NSNumber numberWithInteger:idx]
-    [self.payees enumerateObjectsUsingBlock:^(NSString * object, NSUInteger idx, BOOL *stop) {
-        XLFormOptionsObject *option = [XLFormOptionsObject formOptionsObjectWithValue:object displayText:object];
-        [payeeOptions addObject:option];
-        if ([object isEqualToString:payee]){
-            row.value = option;
-        }
-    }];
-    
-    row.selectorOptions = payeeOptions;
-    if (!row.value) {
-        row.value = [payeeOptions objectAtIndex:0];
-    }
-   
+    [Settings loadArray: self.payees intoRow: row withDefault: payee];
     [section addFormRow:row];
 }
 

@@ -6,6 +6,7 @@
 //
 
 #import "UIWebView+Blocks.h"
+#import <objc/runtime.h>
 
 void (^__loadedBlock)(UIWebView *webView);
 void (^__failureBlock)(UIWebView *webView, NSError *error);
@@ -17,6 +18,14 @@ uint __loadedWebItems;
 @implementation UIWebView (Block)
 
 #pragma mark - UIWebView+Blocks
+
+-(void)setProxyDelegate:(id)proxyDelegate{
+    objc_setAssociatedObject(self,@selector(proxyDelegate),proxyDelegate, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(id)proxyDelegate{
+    return (id)objc_getAssociatedObject(self, @selector(proxyDelegate));
+}
 
 -(void)loadRequest:(NSURLRequest *)request
                    loaded:(void (^)(UIWebView *webView))loadedBlock
@@ -37,11 +46,15 @@ uint __loadedWebItems;
     __loadStartedBlock  = loadStartedBlock;
     __shouldLoadBlock   = shouldLoadBlock;
     
+    if(self.delegate){
+        self.proxyDelegate = self.delegate;
+    }
     self.delegate    = self;
     
     [self loadRequest: request];
     
 }
+
 -(void)setLoadedBlock: (void (^)(UIWebView *webView)) block{
     __loadedBlock = block;
 }
@@ -52,6 +65,9 @@ uint __loadedWebItems;
 
 #pragma mark - Private Static delegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
+    if (self.proxyDelegate) {
+        [self.proxyDelegate webViewDidFinishLoad:webView];
+    }
     __loadedWebItems--;
     
     if(__loadedBlock && (!TRUE_END_REPORT || __loadedWebItems == 0)){
@@ -61,6 +77,9 @@ uint __loadedWebItems;
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    if (self.proxyDelegate) {
+        [self.proxyDelegate webView:webView didFailLoadWithError:error];
+    }
     __loadedWebItems--;
     
     if(__failureBlock)
@@ -68,6 +87,9 @@ uint __loadedWebItems;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
+    if (self.proxyDelegate) {
+        [self.proxyDelegate webViewDidStartLoad:webView];
+    }
     __loadedWebItems++;
     
     if(__loadStartedBlock && (!TRUE_END_REPORT || __loadedWebItems > 0))
@@ -75,10 +97,15 @@ uint __loadedWebItems;
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if (self.proxyDelegate) {
+        [self.proxyDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
+    }
     if(__shouldLoadBlock)
         return __shouldLoadBlock(webView, request, navigationType);
     
     return YES;
 }
+
+
 
 @end

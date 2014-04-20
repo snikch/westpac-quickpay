@@ -16,10 +16,10 @@
 #endif
 
 
-
-
 #define kUsernameKey @"westpacUsername"
 #define kPasswordKey @"westpacPassword"
+
+#define kReferenceMaxLength 12
 
 #define kUrlLogin @"https://sec.westpac.co.nz/IOLB/Login.jsp"
 #define kLoginFormUsernameName @"j_username"
@@ -29,8 +29,19 @@
 #define kMakePaymentsName @"Make a subsequent payment"
 #define kPrintPayeeListName @"Print a list of people you have saved"
 
+#define kMakePaymentNextStepId @"nextStep"
+#define kMakePaymentConfirmId @"triggerBtn"
+#define kMakePaymentConfirmText @"Yes, make this payment"
+
 #define kPayeesTableId @"TBL4"
 
 #define jsPayeeNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 2, 99).reduce(function(a, tr){ var m = tr.children[0].innerHTML.match(/([\\w\\s]+)\\s\\([0-9]+\\)/); if(m) a.push(m[1]); return a; }, []).join(',');"
 
 #define jsAccountNames @"Array.prototype.splice.call(document.getElementById('TBL4').children[0].children, 5, 199).reduce(function(a, el, i){ if(i % 6 !== 0){ return a; }; a.push(el.children[0].children[0].innerHTML); return a; }, []).join(',');"
+
+// Replacements: Account
+#define jsSetPaymentAccount @"Array.prototype.slice.call(document.getElementsByName('selectedAccountId')[0].children).reduce(function(opt, el){ if(el.innerHTML.match(/^%@/)){ opt = el; }; return opt;},null).selected = 'selected'"
+
+// Replacements: Payee, Amount (must be two decimal places), Reference (max 12 chars)
+#define jsSetPaymentDetails @"var row = Array.prototype.slice.call(document.getElementsByClassName('expandableRow')).reduce(function(a, el){ var label = el.children[0].innerHTML; if(label.match(/^%@/)){ a.id = label.match(/^[\\w\\s]+\\s&nbsp;\\(([0-9]+)\\)/)[1]; a.el = el; }; return a; }, {}); document.getElementsByName('amount' + row.id)[0].value = '%@'; document.getElementsByName('payerParticulars' + row.id)[0].value = '%@';"
+

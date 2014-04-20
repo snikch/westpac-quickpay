@@ -4,7 +4,8 @@
 target "Wamex" do
 	pod 'XLForm', '~> 1.0.0'
 	pod 'NJKWebViewProgress', '~> 0.2.2'
-	 pod 'PDKeychainBindingsController', '~> 0.0.1'
+	pod 'PDKeychainBindingsController', '~> 0.0.1'
+	pod 'MRProgress', '~> 0.4.1'
 end
 
 target "WamexTests" do

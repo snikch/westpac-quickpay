@@ -28,6 +28,8 @@
 		2030143B190215D0000F0521 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143A190215D0000F0521 /* WebClient.m */; };
 		2030143E190217E3000F0521 /* UIWebView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030143D190217E3000F0521 /* UIWebView+Blocks.m */; };
 		2030144119028AC2000F0521 /* PaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030144019028AC2000F0521 /* PaymentController.m */; };
+		2030144419034377000F0521 /* PaymentProcessingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2030144319034377000F0521 /* PaymentProcessingController.m */; };
+		2030144719034A4F000F0521 /* apple-touch-icon-precomposed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030144619034A4F000F0521 /* apple-touch-icon-precomposed@2x.png */; };
 		7BE89481F53C4B39932776FF /* libPods-Wamex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,9 @@
 		2030143D190217E3000F0521 /* UIWebView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Blocks.m"; sourceTree = "<group>"; };
 		2030143F19028AC2000F0521 /* PaymentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentController.h; sourceTree = "<group>"; };
 		2030144019028AC2000F0521 /* PaymentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentController.m; sourceTree = "<group>"; };
+		2030144219034377000F0521 /* PaymentProcessingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentProcessingController.h; sourceTree = "<group>"; };
+		2030144319034377000F0521 /* PaymentProcessingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProcessingController.m; sourceTree = "<group>"; };
+		2030144619034A4F000F0521 /* apple-touch-icon-precomposed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-touch-icon-precomposed@2x.png"; sourceTree = "<group>"; };
 		52EACCABB200447EA4172357 /* Pods-Wamex.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wamex.xcconfig"; path = "Pods/Pods-Wamex.xcconfig"; sourceTree = "<group>"; };
 		D3A1EBEDA4A44C7EAA434703 /* libPods-Wamex.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wamex.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,24 +143,15 @@
 		203013FB1901F655000F0521 /* Wamex */ = {
 			isa = PBXGroup;
 			children = (
-				2030143C190217E3000F0521 /* UIWebView+Blocks.h */,
-				2030143D190217E3000F0521 /* UIWebView+Blocks.m */,
-				20301439190215D0000F0521 /* WebClient.h */,
-				2030143A190215D0000F0521 /* WebClient.m */,
+				2030144519034384000F0521 /* Controllers */,
 				203014041901F655000F0521 /* AppDelegate.h */,
 				203014051901F655000F0521 /* AppDelegate.m */,
-				203014071901F655000F0521 /* Main_iPhone.storyboard */,
-				2030140A1901F655000F0521 /* Main_iPad.storyboard */,
-				2030140D1901F655000F0521 /* MainViewController.h */,
-				2030140E1901F655000F0521 /* MainViewController.m */,
-				2030143F19028AC2000F0521 /* PaymentController.h */,
-				2030144019028AC2000F0521 /* PaymentController.m */,
 				203014301901FDC8000F0521 /* Settings.h */,
 				203014311901FDC8000F0521 /* Settings.m */,
-				2030143319020CC4000F0521 /* SettingsNavigationViewController.h */,
-				2030143419020CC4000F0521 /* SettingsNavigationViewController.m */,
-				203014101901F655000F0521 /* FlipsideViewController.h */,
-				203014111901F655000F0521 /* FlipsideViewController.m */,
+				20301439190215D0000F0521 /* WebClient.h */,
+				2030143A190215D0000F0521 /* WebClient.m */,
+				2030143C190217E3000F0521 /* UIWebView+Blocks.h */,
+				2030143D190217E3000F0521 /* UIWebView+Blocks.m */,
 				203014131901F655000F0521 /* Images.xcassets */,
 				203013FC1901F655000F0521 /* Supporting Files */,
 			);
@@ -165,6 +161,9 @@
 		203013FC1901F655000F0521 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2030144619034A4F000F0521 /* apple-touch-icon-precomposed@2x.png */,
+				203014071901F655000F0521 /* Main_iPhone.storyboard */,
+				2030140A1901F655000F0521 /* Main_iPad.storyboard */,
 				203013FD1901F655000F0521 /* Wamex-Info.plist */,
 				203013FE1901F655000F0521 /* InfoPlist.strings */,
 				203014011901F655000F0521 /* main.m */,
@@ -189,6 +188,23 @@
 				203014231901F655000F0521 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2030144519034384000F0521 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				203014101901F655000F0521 /* FlipsideViewController.h */,
+				203014111901F655000F0521 /* FlipsideViewController.m */,
+				2030140D1901F655000F0521 /* MainViewController.h */,
+				2030140E1901F655000F0521 /* MainViewController.m */,
+				2030143F19028AC2000F0521 /* PaymentController.h */,
+				2030144019028AC2000F0521 /* PaymentController.m */,
+				2030144219034377000F0521 /* PaymentProcessingController.h */,
+				2030144319034377000F0521 /* PaymentProcessingController.m */,
+				2030143319020CC4000F0521 /* SettingsNavigationViewController.h */,
+				2030143419020CC4000F0521 /* SettingsNavigationViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +287,7 @@
 			files = (
 				2030140C1901F655000F0521 /* Main_iPad.storyboard in Resources */,
 				203014141901F655000F0521 /* Images.xcassets in Resources */,
+				2030144719034A4F000F0521 /* apple-touch-icon-precomposed@2x.png in Resources */,
 				203014091901F655000F0521 /* Main_iPhone.storyboard in Resources */,
 				203014001901F655000F0521 /* InfoPlist.strings in Resources */,
 			);
@@ -333,6 +350,7 @@
 				2030143519020CC4000F0521 /* SettingsNavigationViewController.m in Sources */,
 				2030143B190215D0000F0521 /* WebClient.m in Sources */,
 				2030144119028AC2000F0521 /* PaymentController.m in Sources */,
+				2030144419034377000F0521 /* PaymentProcessingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

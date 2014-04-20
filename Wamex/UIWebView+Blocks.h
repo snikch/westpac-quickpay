@@ -20,6 +20,12 @@
 #define TRUE_END_REPORT YES
 
 /**
+ Instance variable to store another delegate that wants updates
+ */
+
+@property (weak, nonatomic) id <UIWebViewDelegate> proxyDelegate;
+
+/**
  Load a request and get notified when a web page is loaded successfully or fails to load
  
  @param request NSURLRequest to load
